@@ -1,5 +1,4 @@
-import { Container } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Container, Grid } from "@mui/material";
 import { TabbedLayout } from "/src/layouts/TabbedLayout";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import tabOptions from "./tabOptions";
@@ -13,16 +12,16 @@ const Page = () => {
   return (
     <Container sx={{ pt: 3 }} maxWidth="xl">
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippPermissionReport importReport={importReport} setImportReport={setImportReport} />
         </Grid>
-        <Grid item size={{ lg: 6, md: 12, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={12} lg={6}>
           <CippPermissionCheck type="Permissions" importReport={importReport} />
         </Grid>
-        <Grid item size={{ lg: 6, md: 12, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={12} lg={6}>
           <CippPermissionCheck type="GDAP" importReport={importReport} />
         </Grid>
-        <Grid item size={{ lg: 12, md: 12, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <CippPermissionCheck type="Tenants" importReport={importReport} />
         </Grid>
       </Grid>

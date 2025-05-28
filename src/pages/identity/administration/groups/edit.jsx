@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Typography } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Grid, Divider, Typography } from "@mui/material";
 import { useForm, useWatch } from "react-hook-form";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import CippFormPage from "/src/components/CippFormPages/CippFormPage";
@@ -91,7 +90,7 @@ const EditGroup = () => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item size={{ md: 6, xs: 12 }}>
+      <Grid item xs={12} md={6}>
         <CippFormPage
           formControl={formControl}
           queryKey={[`ListGroups-${groupId}`]}
@@ -102,7 +101,7 @@ const EditGroup = () => {
         >
           <Typography variant="h6">Add</Typography>
           <Grid container spacing={2}>
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CippFormUserSelector
                 formControl={formControl}
                 name="AddMember"
@@ -118,7 +117,7 @@ const EditGroup = () => {
             </Grid>
 
             {/* AddOwners */}
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CippFormUserSelector
                 formControl={formControl}
                 name="AddOwner"
@@ -133,7 +132,7 @@ const EditGroup = () => {
                 removeOptions={groupInfo.data?.owners?.map((o) => o.userPrincipalName)}
               />
             </Grid>
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CippFormContactSelector
                 formControl={formControl}
                 name="AddContact"
@@ -151,7 +150,7 @@ const EditGroup = () => {
               />
             </Grid>
             <Divider sx={{ my: 2, width: "100%" }} />
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <Typography variant="h6">Remove</Typography>
 
               <CippFormComponent
@@ -176,7 +175,7 @@ const EditGroup = () => {
             </Grid>
 
             {/* RemoveOwners */}
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CippFormComponent
                 type="autoComplete"
                 isFetching={groupInfo.isFetching}
@@ -195,7 +194,7 @@ const EditGroup = () => {
                 multiple={true}
               />
             </Grid>
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CippFormComponent
                 type="autoComplete"
                 isFetching={groupInfo.isFetching}
@@ -220,7 +219,7 @@ const EditGroup = () => {
 
             <Divider sx={{ my: 2, width: "100%" }} />
             {(groupType === "Microsoft 365" || groupType === "Distribution List") && (
-              <Grid item size={{ xs: 12 }}>
+              <Grid item xs={12}>
                 <CippFormComponent
                   type="switch"
                   label="Let people outside the organization email the group"
@@ -231,7 +230,7 @@ const EditGroup = () => {
             )}
 
             {groupType === "Microsoft 365" && (
-              <Grid item size={{ xs: 12 }}>
+              <Grid item xs={12}>
                 <CippFormComponent
                   type="switch"
                   label="Send Copies of team emails and events to team members inboxes"
@@ -243,7 +242,7 @@ const EditGroup = () => {
           </Grid>
         </CippFormPage>
       </Grid>
-      <Grid sx={{ mt: 19 }} item size={{ md: 5 }}>
+      <Grid sx={{ mt: 19 }} item md={5}>
         <CippDataTable
           sx={{ width: "100%" }}
           title="Members"

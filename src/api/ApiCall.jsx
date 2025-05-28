@@ -1,10 +1,4 @@
-import {
-  keepPreviousData,
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { showToast } from "../store/toasts";
@@ -21,7 +15,7 @@ export function ApiGetCall(props) {
     bulkRequest = false,
     toast = false,
     onResult,
-    staleTime = 300000,
+    staleTime = 600000, // 10 minutes
     refetchOnWindowFocus = false,
     refetchOnMount = true,
     refetchOnReconnect = true,
@@ -218,7 +212,7 @@ export function ApiGetCallWithPagination({
       }
       return lastPage?.Metadata?.nextLink ? { nextLink: lastPage.Metadata.nextLink } : undefined;
     },
-    staleTime: 300000,
+    staleTime: 600000, // 10 minutes
     refetchOnWindowFocus: false,
     retry: retryFn,
   });

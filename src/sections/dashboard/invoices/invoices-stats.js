@@ -83,7 +83,8 @@ export const InvoicesStats = (props) => {
           spacing={2}
         >
           <Grid
-            size={{ md: 6, xs: 12 }}
+            xs={12}
+            md={6}
           >
             <Typography
               color="text.secondary"
@@ -109,8 +110,8 @@ export const InvoicesStats = (props) => {
             </Typography>
           </Grid>
           <Grid
-            size={{ md: 6, xs: 12 }}
-
+            xs={12}
+            md={6}
             sx={{
               display: 'flex',
               flexDirection: {

@@ -1,5 +1,13 @@
-import { Box, Button, Container, Typography, CircularProgress, Skeleton, Link } from "@mui/material";
-import { Grid } from "@mui/system";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Typography,
+  CircularProgress,
+  Skeleton,
+  Link,
+} from "@mui/material";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import { useForm, useWatch } from "react-hook-form";
 import CippButtonCard from "../../../../components/CippCards/CippButtonCard";
@@ -26,13 +34,13 @@ const Page = () => {
     >
       <Container maxWidth={false}>
         <Grid container spacing={3}>
-          <Grid item size={{ xs: 4 }}>
+          <Grid item xs={4}>
             <CippButtonCard
               title="Tenant lookup"
               cardSx={{ display: "flex", flexDirection: "column", height: "100%" }}
             >
               <Grid container spacing={2}>
-                <Grid item size={{ xs: 8 }}>
+                <Grid item xs={8}>
                   <CippFormComponent
                     formControl={formControl}
                     name="domain"
@@ -41,7 +49,7 @@ const Page = () => {
                     required
                   />
                 </Grid>
-                <Grid item size={{ xs: 4 }}>
+                <Grid item xs={4}>
                   <Button
                     type="submit"
                     onClick={() => getTenant.refetch()}
@@ -57,20 +65,20 @@ const Page = () => {
 
           {/* Results Card */}
           {getTenant.isFetching ? (
-            <Grid item size={{ xs: 8 }}>
+            <Grid item xs={8}>
               <CippButtonCard title="Fetching Results">
                 <Grid container spacing={2}>
-                  <Grid item size={{ xs: 12 }} textAlign="center">
+                  <Grid item xs={12} textAlign="center">
                     <Skeleton width={"100%"} />
                   </Grid>
                 </Grid>
               </CippButtonCard>
             </Grid>
           ) : getTenant.data ? (
-            <Grid item size={{ xs: 8 }}>
+            <Grid item xs={8}>
               <CippButtonCard title="Tenant Lookup Results">
                 <Grid container spacing={2}>
-                  <Grid item size={{ xs: 6 }}>
+                  <Grid item xs={6}>
                     <Typography variant="body1">
                       <strong>Tenant Name:</strong> {domain}
                     </Typography>
@@ -88,7 +96,7 @@ const Page = () => {
                         : "N/A"}
                     </Typography>
                   </Grid>
-                  <Grid item size={{ xs: 6 }}>
+                  <Grid item xs={6}>
                     <Typography variant="body1">
                       <strong>domains:</strong>
                     </Typography>

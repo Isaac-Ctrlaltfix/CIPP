@@ -79,7 +79,7 @@ const CippAppPermissionBuilder = ({
     refetch: refetchServicePrincipals,
   } = ApiGetCall({
     url: "/api/ExecServicePrincipals",
-    queryKey: "execServicePrincipalList",
+    queryKey: "execServicePrincipals",
     waiting: true,
   });
 
@@ -545,7 +545,7 @@ const CippAppPermissionBuilder = ({
     return (
       <>
         {spInfoFetching && <Skeleton variant="rectangle" height={250} />}
-        {servicePrincipal && spInfoSuccess && !spInfoFetching && (
+        {servicePrincipal && spInfoSuccess && (
           <>
             <Typography variant="body2" color="textSecondary" sx={{ mb: 3 }}>
               Manage the permissions for the {servicePrincipal.displayName}.
@@ -715,8 +715,7 @@ const CippAppPermissionBuilder = ({
                         <CippFormComponent
                           type="autoComplete"
                           fullWidth
-                          label="Add a Service Principal (optional)"
-                          placeholder="Select a Service Principal or enter an AppId if not listed"
+                          label="Select a Service Principal or enter an AppId if not listed"
                           name="servicePrincipal"
                           createOption={true}
                           onCreateOption={onCreateServicePrincipal}
@@ -1074,7 +1073,10 @@ const CippAppPermissionBuilder = ({
                   </SvgIcon>
                 }
                 type="submit"
-                disabled={updatePermissions.isPending}
+                disabled={
+                  updatePermissions.isPending ||
+                  _.isEqual(currentPermissions.Permissions, newPermissions.Permissions)
+                }
                 onClick={handleSubmit}
               >
                 Save

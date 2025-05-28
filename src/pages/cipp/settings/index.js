@@ -1,5 +1,4 @@
-import { Container } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Container, Grid } from "@mui/material";
 import { TabbedLayout } from "/src/layouts/TabbedLayout";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import tabOptions from "./tabOptions";
@@ -13,19 +12,19 @@ const Page = () => {
   return (
     <Container sx={{ pt: 3 }} maxWidth="xl">
       <Grid container spacing={2}>
-        <Grid item size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <CippVersionProperties />
         </Grid>
-        <Grid item size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <CippPasswordSettings />
         </Grid>
-        <Grid item size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <CippDnsSettings />
         </Grid>
-        <Grid item size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <CippCacheSettings />
         </Grid>
-        <Grid item size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <CippBackupSettings />
         </Grid>
       </Grid>

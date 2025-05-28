@@ -11,6 +11,7 @@ import {
   CardActions,
 } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import Head from "next/head";
 import { ApiPostCall } from "../../api/ApiCall";
 import { CippApiResults } from "../CippComponents/CippApiResults";
 import { useEffect } from "react";
@@ -70,11 +71,6 @@ const CippFormPage = (props) => {
   }, [postCall.isSuccess]);
 
   const handleSubmit = () => {
-    formControl.trigger();
-    // Check if the form is valid before proceeding
-    if (!isValid) {
-      return;
-    }
     const values = customDataformatter
       ? customDataformatter(formControl.getValues())
       : formControl.getValues();

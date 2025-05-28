@@ -1,5 +1,4 @@
-import { Box, Button, CardContent, Stack, Typography, Skeleton } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Box, Button, CardContent, Grid, Stack, Typography, Skeleton } from "@mui/material";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 
 import CippPageCard from "../../../components/CippCards/CippPageCard";
@@ -56,7 +55,7 @@ const Page = () => {
   });
 
   const NextBackupRun = (props) => {
-    const date = new Date(props.date);
+    const date = new Date(props.date * 1000);
     if (isNaN(date)) {
       return "Not Scheduled";
     } else {
@@ -136,7 +135,6 @@ const Page = () => {
       confirmText: "Are you sure you want to restore this backup?",
       relatedQueryKeys: ["BackupList"],
       multiPost: false,
-      hideBulk: true,
     },
     {
       label: "Download Backup",

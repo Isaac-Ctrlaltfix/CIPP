@@ -38,7 +38,7 @@ const Page = () => {
   return (
     <>
       <CippWizardPage
-        initialState={{ configMode: "template", CopyPermissions: true }}
+        initialState={{ CopyPermissions: true }}
         steps={steps}
         postUrl="/api/ExecAddMultiTenantApp"
         wizardTitle="Application Approval Wizard"

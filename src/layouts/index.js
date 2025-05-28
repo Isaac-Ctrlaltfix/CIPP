@@ -82,17 +82,12 @@ export const Layout = (props) => {
   const [menuItems, setMenuItems] = useState(nativeMenuItems);
   const currentTenant = settings?.currentTenant;
   const currentRole = ApiGetCall({
-    url: "/api/me",
-    queryKey: "authmecipp",
-  });
-  const [hideSidebar, setHideSidebar] = useState(false);
-
-  const swaStatus = ApiGetCall({
     url: "/.auth/me",
-    queryKey: "authmeswa",
+    queryKey: "authmecipp",
     staleTime: 120000,
     refetchOnWindowFocus: true,
   });
+  const [hideSidebar, setHideSidebar] = useState(false);
 
   useEffect(() => {
     if (currentRole.isSuccess && !currentRole.isFetching) {
@@ -123,15 +118,8 @@ export const Layout = (props) => {
 
       const filteredMenu = filterItemsByRole(nativeMenuItems);
       setMenuItems(filteredMenu);
-    } else if (
-      swaStatus.isLoading ||
-      swaStatus.data?.clientPrincipal === null ||
-      swaStatus.data === undefined ||
-      currentRole.isLoading
-    ) {
-      setHideSidebar(true);
     }
-  }, [currentRole.isSuccess, swaStatus.data, swaStatus.isLoading]);
+  }, [currentRole.isSuccess]);
 
   const handleNavPin = useCallback(() => {
     settings.handleUpdate({
@@ -193,11 +181,11 @@ export const Layout = (props) => {
   });
 
   useEffect(() => {
-    if (!hideSidebar && version.isFetched && !alertsAPI.isFetched) {
+    if (version.isFetched && !alertsAPI.isFetched) {
       alertsAPI.waiting = true;
       alertsAPI.refetch();
     }
-  }, [version, alertsAPI, hideSidebar]);
+  }, [version, alertsAPI]);
 
   useEffect(() => {
     if (alertsAPI.isSuccess && !alertsAPI.isFetching) {
@@ -250,27 +238,6 @@ export const Layout = (props) => {
         }}
       >
         <LayoutContainer>
-          <Dialog
-            fullWidth
-            maxWidth="lg"
-            onClose={createDialog.handleClose}
-            open={createDialog.open}
-          >
-            <DialogTitle>Setup Wizard</DialogTitle>
-            <DialogContent>
-              <Page />
-            </DialogContent>
-          </Dialog>
-          {!setupCompleted && (
-            <Box sx={{ flexGrow: 1, py: 2 }}>
-              <Container maxWidth={false}>
-                <Alert severity="info">
-                  Setup has not been completed.
-                  <Button onClick={createDialog.handleOpen}>Start Wizard</Button>
-                </Alert>
-              </Container>
-            </Box>
-          )}
           {(currentTenant === "AllTenants" || !currentTenant) && !allTenantsSupport ? (
             <Box sx={{ flexGrow: 1, py: 4 }}>
               <Container maxWidth={false}>
@@ -288,7 +255,30 @@ export const Layout = (props) => {
               </Container>
             </Box>
           ) : (
-            <>{children}</>
+            <>
+              <Dialog
+                fullWidth
+                maxWidth="lg"
+                onClose={createDialog.handleClose}
+                open={createDialog.open}
+              >
+                <DialogTitle>Setup Wizard</DialogTitle>
+                <DialogContent>
+                  <Page />
+                </DialogContent>
+              </Dialog>
+              {!setupCompleted && (
+                <Box sx={{ flexGrow: 1, py: 2 }}>
+                  <Container maxWidth={false}>
+                    <Alert severity="info">
+                      Setup has not been completed.
+                      <Button onClick={createDialog.handleOpen}>Start Wizard</Button>
+                    </Alert>
+                  </Container>
+                </Box>
+              )}
+              {children}
+            </>
           )}
           <Footer />
         </LayoutContainer>

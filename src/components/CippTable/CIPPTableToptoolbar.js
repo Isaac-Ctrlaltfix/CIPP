@@ -74,10 +74,6 @@ export const CIPPTableToptoolbar = ({
   const handleActionMenuOpen = (event) => setActionMenuAnchor(event.currentTarget);
   const handleActionMenuClose = () => setActionMenuAnchor(null);
 
-  const getBulkActions = (actions) => {
-    return actions?.filter((action) => !action.link && !action?.hideBulk) || [];
-  };
-
   useEffect(() => {
     //if usedData changes, deselect all rows
     table.toggleAllRowsSelected(false);
@@ -369,7 +365,6 @@ export const CIPPTableToptoolbar = ({
               </MenuItem>
               {api?.url === "/api/ListGraphRequest" && (
                 <MenuItem
-                  key="custom-filter"
                   onClick={() => {
                     filterPopover.handleClose();
                     setFilterCanvasVisible(true);
@@ -453,7 +448,9 @@ export const CIPPTableToptoolbar = ({
                   <DeveloperMode />
                 </IconButton>
               </Tooltip>
-              {mdDown && <MRT_ToggleFullScreenButton table={table} />}
+              {mdDown && (
+                <MRT_ToggleFullScreenButton table={table} />
+              )}
             </>
             {
               //add a little icon with how many rows are selected
@@ -490,7 +487,7 @@ export const CIPPTableToptoolbar = ({
                 <SevereCold />
               </Tooltip>
             )}
-            {actions && getBulkActions(actions).length > 0 && (table.getIsSomeRowsSelected() || table.getIsAllRowsSelected()) && (
+            {actions && (table.getIsSomeRowsSelected() || table.getIsAllRowsSelected()) && (
               <>
                 <Button
                   onClick={popover.handleOpen}
@@ -525,34 +522,36 @@ export const CIPPTableToptoolbar = ({
                     vertical: "top",
                   }}
                 >
-                  {getBulkActions(actions).map((action, index) => (
-                    <MenuItem
-                      key={index}
-                      onClick={() => {
-                        setActionData({
-                          data: table.getSelectedRowModel().rows.map((row) => row.original),
-                          action: action,
-                          ready: true,
-                        });
+                  {actions
+                    ?.filter((action) => !action.link && !action?.hideBulk)
+                    .map((action, index) => (
+                      <MenuItem
+                        key={index}
+                        onClick={() => {
+                          setActionData({
+                            data: table.getSelectedRowModel().rows.map((row) => row.original),
+                            action: action,
+                            ready: true,
+                          });
 
-                        if (action?.noConfirm && action.customFunction) {
-                          table
-                            .getSelectedRowModel()
-                            .rows.map((row) =>
-                              action.customFunction(row.original.original, action, {})
-                            );
-                        } else {
-                          createDialog.handleOpen();
-                          popover.handleClose();
-                        }
-                      }}
-                    >
-                      <SvgIcon fontSize="small" sx={{ minWidth: "30px" }}>
-                        {action.icon}
-                      </SvgIcon>
-                      <ListItemText>{action.label}</ListItemText>
-                    </MenuItem>
-                  ))}
+                          if (action?.noConfirm && action.customFunction) {
+                            table
+                              .getSelectedRowModel()
+                              .rows.map((row) =>
+                                action.customFunction(row.original.original, action, {})
+                              );
+                          } else {
+                            createDialog.handleOpen();
+                            popover.handleClose();
+                          }
+                        }}
+                      >
+                        <SvgIcon fontSize="small" sx={{ minWidth: "30px" }}>
+                          {action.icon}
+                        </SvgIcon>
+                        <ListItemText>{action.label}</ListItemText>
+                      </MenuItem>
+                    ))}
                 </Menu>
               </>
             )}

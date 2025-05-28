@@ -3,8 +3,7 @@ import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import tabOptions from "./tabOptions";
 import { useSecureScore } from "../../../../hooks/use-securescore";
 import { CippInfoBar } from "../../../../components/CippCards/CippInfoBar";
-import { Box, Button, Chip, Container, Typography } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Box, Button, Chip, Container, Grid, Typography } from "@mui/material";
 import { CheckCircleIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
 import { Map, Score } from "@mui/icons-material";
 import { CippChartCard } from "../../../../components/CippCards/CippChartCard";
@@ -17,7 +16,6 @@ import { useState } from "react";
 import { CippTableDialog } from "../../../../components/CippComponents/CippTableDialog";
 import { CippImageCard } from "../../../../components/CippCards/CippImageCard";
 import { useSettings } from "../../../../hooks/use-settings";
-import { useRouter } from "next/navigation";
 
 const Page = () => {
   const currentTenant = useSettings().currentTenant;
@@ -26,14 +24,14 @@ const Page = () => {
   const [actionData, setActionData] = useState({ data: {}, action: {}, ready: false });
   const [updatesData, setUpdatesData] = useState({ data: {}, ready: false });
   const cippTableDialog = useDialog();
-  const router = useRouter();
+
   const timeAgo = new TimeAgo("en-US");
 
   const openRemediation = (url) => {
     if (url.startsWith("https")) {
       window.open(url, "_blank");
     } else {
-      router.push(url);
+      navigate(url);
     }
   };
   return (
@@ -46,7 +44,7 @@ const Page = () => {
     >
       <Grid container spacing={2}>
         {currentTenant === "AllTenants" && (
-          <Grid item size={{ md: 4, xs: 12 }}>
+          <Grid item xs={12} md={4}>
             <CippImageCard
               title="Not supported"
               imageUrl="/assets/illustrations/undraw_website_ij0l.svg"
@@ -58,7 +56,7 @@ const Page = () => {
         )}
         {currentTenant !== "AllTenants" && (
           <>
-            <Grid item size={{ md: 12, xs: 12 }}>
+            <Grid item xs={12} md={12}>
               <CippInfoBar
                 isFetching={secureScore.isFetching}
                 data={[
@@ -87,7 +85,7 @@ const Page = () => {
                 ]}
               />
             </Grid>
-            <Grid item size={{ md: 3, xs: 12 }}>
+            <Grid item xs={12} md={3}>
               <CippChartCard
                 isFetching={secureScore.isFetching}
                 title={"Secure Score"}
@@ -111,7 +109,7 @@ const Page = () => {
             {currentTenant !== "AllTenants" &&
               secureScore.isSuccess &&
               secureScore.translatedData.controlScores.map((secureScoreControl) => (
-                <Grid item size={{ md: 3, xs: 12 }} key={secureScoreControl.controlName}>
+                <Grid item xs={12} md={3} key={secureScoreControl.controlName}>
                   <CippButtonCard
                     title={secureScoreControl.title}
                     isFetching={secureScore.isFetching}

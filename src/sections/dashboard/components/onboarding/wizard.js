@@ -6,7 +6,7 @@ import { WizardConfirmationStep } from "../../../../components/CippWizard/CippWi
 import { WizardNotificationsStep } from "../../../../components/CippWizard/CippPSASyncOptions";
 import { WizardProfileStep } from "../../../../components/CippWizard/CippPSACredentialsStep";
 import { WizardSteps } from "../../../../components/CippWizard/wizard-steps";
-import { Grid } from "@mui/system";
+import Grid from "@mui/material/Grid2";
 
 const steps = [
   {
@@ -112,10 +112,10 @@ export const Wizard = (props) => {
       {orientation === "vertical" ? (
         <CardContent>
           <Grid container spacing={3}>
-            <Grid size={{ md: 4, xs: 12 }}>
+            <Grid xs={12} md={4}>
               <WizardSteps activeStep={activeStep} orientation={orientation} steps={steps} />
             </Grid>
-            <Grid size={{ md: 8, xs: 12 }}>
+            <Grid xs={12} md={8}>
               {content}
             </Grid>
           </Grid>

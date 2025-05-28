@@ -7,6 +7,7 @@ import {
   CardActions,
   CardContent,
   Container,
+  Grid,
   Skeleton,
   Stack,
   Typography,
@@ -16,7 +17,6 @@ import { Sync } from "@mui/icons-material";
 import { useSettings } from "/src/hooks/use-settings";
 import { ApiGetCall } from "/src/api/ApiCall";
 import Link from "next/link";
-import { Grid } from "@mui/system";
 
 const Page = () => {
   const settings = useSettings();
@@ -67,7 +67,7 @@ const Page = () => {
           }
 
           return (
-            <Grid item size={{ md: 6, sm: 12, xl: 3 }} key={extension.id}>
+            <Grid item sm={12} md={6} xl={3} key={extension.id}>
               <CardActionArea
                 component={Link}
                 sx={{

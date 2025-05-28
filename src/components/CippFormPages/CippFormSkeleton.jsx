@@ -1,6 +1,4 @@
-import { Box, Skeleton } from "@mui/material";
-
-import { Grid } from "@mui/system";
+import { Box, Grid, Skeleton } from "@mui/material";
 
 const CippFormSkeleton = ({ layout }) => {
   return (
@@ -8,7 +6,7 @@ const CippFormSkeleton = ({ layout }) => {
       {layout.map((columns, rowIndex) => (
         <Grid container spacing={2} key={`row-${rowIndex}`} sx={{ mb: 2 }}>
           {Array.from({ length: columns }).map((_, columnIndex) => (
-            <Grid item size={{ xs: 12 / columns }} key={`skeleton-${rowIndex}-${columnIndex}`}>
+            <Grid item xs={12 / columns} key={`skeleton-${rowIndex}-${columnIndex}`}>
               <Skeleton variant="rectangular" width="100%" />
             </Grid>
           ))}

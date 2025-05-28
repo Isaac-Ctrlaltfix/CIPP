@@ -1,6 +1,6 @@
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import { CippTablePage } from "/src/components/CippComponents/CippTablePage.jsx";
-import { RestoreFromTrash, Warning } from "@mui/icons-material";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 
 const Page = () => {
   const pageTitle = "Deleted Items";
@@ -9,20 +9,10 @@ const Page = () => {
     {
       label: "Restore Object",
       type: "POST",
-      icon: <RestoreFromTrash />,
+      icon: <RestoreFromTrashIcon />,
       url: "/api/ExecRestoreDeleted",
-      data: { ID: "id", userPrincipalName: "userPrincipalName", displayName: "displayName" },
-      confirmText: "Are you sure you want to restore this object?",
-      multiPost: false,
-    },
-    {
-      label: "Permanently Delete Object",
-      type: "POST",
-      icon: <Warning />,
-      url: "/api/RemoveDeletedObject",
-      data: { ID: "id", userPrincipalName: "userPrincipalName", displayName: "displayName" },
-      confirmText:
-        "Are you sure you want to permanently delete this object? This action cannot be undone.",
+      data: { ID: "id" },
+      confirmText: "Are you sure you want to restore this user?",
       multiPost: false,
     },
   ];

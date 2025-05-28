@@ -1,5 +1,13 @@
-import { Button, Link, Stack, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
-import { Grid } from "@mui/system";
+import {
+  Button,
+  Grid,
+  Link,
+  Stack,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import { CippWizardStepButtons } from "./CippWizardStepButtons";
 import CippFormComponent from "../CippComponents/CippFormComponent";
 import { CippDataTable } from "../CippTable/CippDataTable";
@@ -79,7 +87,7 @@ export const CippWizardCSVImport = (props) => {
         <Grid container spacing={2}>
           {fields.map((field) => (
             <>
-              <Grid item size={{ md: 4, sm: 6, xs: 12 }} key={field}>
+              <Grid item xs={12} sm={6} md={4} key={field}>
                 <CippFormComponent
                   name={`addrow.${field}`}
                   label={getCippTranslation(field)}
@@ -98,7 +106,7 @@ export const CippWizardCSVImport = (props) => {
               </Grid>
             </>
           ))}
-          <Grid item size={{ md: 4, sm: 6, xs: 12 }}>
+          <Grid item xs={12} sm={6} md={4}>
             <Button size="small" onClick={() => handleAddItem()}>
               Add Item
             </Button>
@@ -108,7 +116,7 @@ export const CippWizardCSVImport = (props) => {
       {!manualFields && (
         <>
           <Grid container spacing={2}>
-            <Grid item size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <Button size="small" onClick={() => setOpen(true)}>
                 Add Item
               </Button>
@@ -119,7 +127,7 @@ export const CippWizardCSVImport = (props) => {
             <DialogContent>
               <Grid container spacing={2} sx={{ py: 1 }}>
                 {fields.map((field) => (
-                  <Grid item size={{ xs: 12 }} key={field}>
+                  <Grid item xs={12} key={field}>
                     <CippFormComponent
                       name={`addrow.${field}`}
                       label={getCippTranslation(field)}

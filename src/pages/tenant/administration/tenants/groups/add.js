@@ -2,9 +2,12 @@ import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import { useForm } from "react-hook-form";
 import { ApiPostCall } from "../../../../../api/ApiCall";
 import { useRouter } from "next/router";
-import { Stack, Box, Typography } from "@mui/material";
-
-import { Grid } from "@mui/system";
+import {
+  Stack,
+  Box,
+  Typography,
+  Grid,
+} from "@mui/material";
 
 import CippPageCard from "../../../../../components/CippCards/CippPageCard";
 import { CippApiResults } from "/src/components/CippComponents/CippApiResults";
@@ -36,7 +39,7 @@ const Page = () => {
     <CippPageCard title="Add Tenant Group" backButtonTitle="Tenant Groups" noTenantInHead={true}>
       <Box sx={{ width: "100%" }}>
         <Grid container spacing={2} sx={{ my: 2, px: 2 }}>
-          <Grid item size={{ md: 8, xs: 12 }}>
+          <Grid item xs={12} md={8}>
             <CippAddEditTenantGroups
               formControl={formControl}
               onSubmit={handleAddGroup}

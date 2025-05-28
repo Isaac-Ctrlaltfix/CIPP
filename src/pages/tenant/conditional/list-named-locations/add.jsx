@@ -1,6 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import CippFormPage from "/src/components/CippFormPages/CippFormPage";
@@ -32,7 +31,7 @@ const DeployNamedLocationForm = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormTenantSelector
             label="Select Tenants"
             formControl={formControl}
@@ -42,7 +41,7 @@ const DeployNamedLocationForm = () => {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormComponent
             type="textField"
             label="Named Location Name"
@@ -52,7 +51,7 @@ const DeployNamedLocationForm = () => {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormComponent
             type="radio"
             label="Type of Location"
@@ -74,7 +73,7 @@ const DeployNamedLocationForm = () => {
           compareType="is"
           compareValue="IPLocation"
         >
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <CippFormComponent
               type="textField"
               label="IPs"
@@ -86,7 +85,7 @@ const DeployNamedLocationForm = () => {
               validators={{ required: "IPs are required" }}
             />
           </Grid>
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <CippFormComponent
               type="switch"
               label="Mark as trusted location"
@@ -103,7 +102,7 @@ const DeployNamedLocationForm = () => {
           compareType="is"
           compareValue="Countries"
         >
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <CippFormComponent
               type="autoComplete"
               label="Countries"
@@ -117,7 +116,7 @@ const DeployNamedLocationForm = () => {
               validators={{ required: "At least one country must be selected" }}
             />
           </Grid>
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <CippFormComponent
               type="switch"
               label="Include unknown countries and regions"

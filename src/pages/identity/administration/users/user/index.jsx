@@ -9,7 +9,7 @@ import { HeaderedTabbedLayout } from "../../../../../layouts/HeaderedTabbedLayou
 import tabOptions from "./tabOptions";
 import { CippCopyToClipBoard } from "../../../../../components/CippComponents/CippCopyToClipboard";
 import { Box, Stack } from "@mui/system";
-import { Grid } from "@mui/system";
+import Grid from "@mui/material/Grid2";
 import { CippUserInfoCard } from "../../../../../components/CippCards/CippUserInfoCard";
 import { SvgIcon, Typography } from "@mui/material";
 import { CippBannerListCard } from "../../../../../components/CippCards/CippBannerListCard";
@@ -87,7 +87,7 @@ const Page = () => {
   });
 
   const userBulkRequest = ApiPostCall({
-    urlFromData: true,
+    urlfromdata: true,
   });
 
   useEffect(() => {

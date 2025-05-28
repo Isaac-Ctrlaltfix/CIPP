@@ -2,6 +2,15 @@ import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import { CippTablePage } from "/src/components/CippComponents/CippTablePage.jsx";
 import { Block } from "@mui/icons-material";
 
+/* 
+  NOTE for Devs:
+  - The original component used a Redux selector (`useSelector`) for tenant data, 
+    which is handled by `CippTablePage` in the refactored version, thus eliminating `useSelector`.
+  - The `ModalService` with `confirm` handling was originally used to confirm blocking sign-in.
+    The action here replaces it with a confirmation text as per current guidelines.
+  - Original button and `FontAwesomeIcon` (faBan) are not used since action confirmation is handled by CippTablePage.
+*/
+
 const Page = () => {
   return (
     <CippTablePage
@@ -14,8 +23,7 @@ const Page = () => {
           icon: <Block />,
           url: "/api/ExecDisableUser",
           data: { ID: "id" },
-          confirmText: "Are you sure you want to block the sign-in for this mailbox?",
-          condition: (row) => row.accountEnabled && !row.onPremisesSyncEnabled,
+          confirmText: "Are you sure you want to block the sign-in for this user?",
         },
       ]}
       offCanvas={{
@@ -23,7 +31,6 @@ const Page = () => {
           "UserPrincipalName",
           "displayName",
           "accountEnabled",
-          "assignedLicenses",
           "onPremisesSyncEnabled",
         ],
       }}
@@ -31,14 +38,7 @@ const Page = () => {
         "UserPrincipalName",
         "displayName",
         "accountEnabled",
-        "assignedLicenses",
         "onPremisesSyncEnabled",
-      ]}
-      filters={[
-        {
-          id: "accountEnabled",
-          value: "Yes"
-        }
       ]}
     />
   );

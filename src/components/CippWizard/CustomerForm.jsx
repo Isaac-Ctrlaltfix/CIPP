@@ -1,5 +1,4 @@
-import "@mui/material";
-import { Grid } from "@mui/system";
+import { Grid } from "@mui/material";
 import CippFormComponent from "../CippComponents/CippFormComponent";
 
 export const CustomerForm = (props) => {
@@ -70,7 +69,7 @@ export const CustomerForm = (props) => {
   return (
     <Grid container spacing={3}>
       {fields.map((field, index) => (
-        <Grid item size={{ md: 6, xs: 12 }} key={index}>
+        <Grid item xs={12} md={6} key={index}>
           <CippFormComponent
             type={field.type}
             label={field.label}

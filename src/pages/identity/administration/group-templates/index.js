@@ -1,13 +1,10 @@
 import { Button } from "@mui/material";
 import { CippTablePage } from "/src/components/CippComponents/CippTablePage.jsx";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
-import { AddBox, RocketLaunch, Delete, GitHub, Edit } from "@mui/icons-material";
+import { AddBox, RocketLaunch, Delete, GitHub } from "@mui/icons-material";
 import Link from "next/link";
 import { CippCodeBlock } from "../../../../components/CippComponents/CippCodeBlock";
 import { ApiGetCall } from "/src/api/ApiCall";
-import { CippPropertyListCard } from "../../../../components/CippCards/CippPropertyListCard";
-import { getCippTranslation } from "../../../../utils/get-cipp-translation";
-import { getCippFormatting } from "../../../../utils/get-cipp-formatting";
 
 const Page = () => {
   const pageTitle = "Group Templates";
@@ -18,11 +15,6 @@ const Page = () => {
     refetchOnReconnect: false,
   });
   const actions = [
-    {
-      label: "Edit Template",
-      icon: <Edit />,
-      link: "/identity/administration/group-templates/edit?id=[GUID]",
-    },
     {
       label: "Save to GitHub",
       type: "POST",
@@ -81,37 +73,13 @@ const Page = () => {
   ];
 
   const offCanvas = {
-    children: (data) => {
-      const keys = Object.keys(data).filter(
-        (key) => !key.includes("@odata") && !key.includes("@data")
-      );
-      const properties = [];
-      keys.forEach((key) => {
-        if (data[key] && data[key].length > 0) {
-          properties.push({
-            label: getCippTranslation(key),
-            value: getCippFormatting(data[key], key),
-          });
-        }
-      });
-      return (
-        <CippPropertyListCard
-          cardSx={{ p: 0, m: -2 }}
-          title="Template Details"
-          propertyItems={properties}
-          actionItems={actions}
-          data={data}
-        />
-      );
-    },
+    children: (row) => <CippCodeBlock type="editor" code={JSON.stringify(row, null, 2)} />,
   };
 
   return (
     <CippTablePage
       title={pageTitle}
       apiUrl="/api/ListGroupTemplates"
-      queryKey="GroupTemplatesList"
-      tenantInTitle={false}
       actions={actions}
       cardButton={
         <>
@@ -124,7 +92,7 @@ const Page = () => {
         </>
       }
       offCanvas={offCanvas}
-      simpleColumns={["displayName", "description", "groupType", "GUID"]}
+      simpleColumns={["Displayname", "Description", "groupType", "GUID"]}
     />
   );
 };

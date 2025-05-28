@@ -1,6 +1,5 @@
 import React from "react";
-import { Typography, Divider } from "@mui/material";
-import { Grid } from "@mui/system";
+import { Grid, Typography, Divider } from "@mui/material";
 import { useForm, useWatch } from "react-hook-form";
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
 import CippFormPage from "/src/components/CippFormPages/CippFormPage";
@@ -26,7 +25,7 @@ const DeployDefenderForm = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormTenantSelector
             label="Select Tenants"
             formControl={formControl}
@@ -40,7 +39,7 @@ const DeployDefenderForm = () => {
         <Divider sx={{ my: 2 }} />
 
         {/* Defender Setup Section */}
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormComponent
             type="switch"
             label="Show Defender Setup Options"
@@ -55,14 +54,14 @@ const DeployDefenderForm = () => {
           compareType="is"
           compareValue={true}
         >
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Typography variant="h6">Defender Setup</Typography>
             <Typography variant="subtitle1">Defender and MEM Reporting</Typography>
           </Grid>
 
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Grid container spacing={2}>
-              <Grid item size={{ md: 6, xs: 12 }}>
+              <Grid item xs={12} md={6}>
                 <CippFormComponent
                   type="switch"
                   label="Allow Microsoft Defender for Endpoint to enforce Endpoint Security Configurations (Compliance)"
@@ -94,7 +93,7 @@ const DeployDefenderForm = () => {
                   formControl={formControl}
                 />
               </Grid>
-              <Grid item size={{ md: 6, xs: 12 }}>
+              <Grid item xs={12} md={6}>
                 <CippFormComponent
                   type="switch"
                   label="Enable App Sync (sending application inventory) for iOS/iPadOS devices"
@@ -139,7 +138,7 @@ const DeployDefenderForm = () => {
         <Divider sx={{ my: 2 }} />
 
         {/* Defender Defaults Policy Section */}
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormComponent
             type="switch"
             label="Show Defender Defaults Policy Options"
@@ -154,14 +153,14 @@ const DeployDefenderForm = () => {
           compareType="is"
           compareValue={true}
         >
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Typography variant="h6">Defender Defaults Policy</Typography>
             <Typography variant="subtitle1">Select Defender policies to deploy</Typography>
           </Grid>
 
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Grid container spacing={2}>
-              <Grid item size={{ md: 6, xs: 12 }}>
+              <Grid item xs={12} md={6}>
                 <CippFormComponent
                   type="switch"
                   label="Allow Archive Scanning"
@@ -217,7 +216,7 @@ const DeployDefenderForm = () => {
                   formControl={formControl}
                 />
               </Grid>
-              <Grid item size={{ md: 6, xs: 12 }}>
+              <Grid item xs={12} md={6}>
                 <CippFormComponent
                   type="switch"
                   label="Allow scanning of downloaded files"
@@ -275,7 +274,7 @@ const DeployDefenderForm = () => {
               </Grid>
 
               {/* Assign to Group */}
-              <Grid item size={{ xs: 12 }}>
+              <Grid item xs={12}>
                 <Typography variant="subtitle1">Assign to Group</Typography>
                 <CippFormComponent
                   type="radio"
@@ -288,7 +287,6 @@ const DeployDefenderForm = () => {
                     { label: "Assign to all users and devices", value: "AllDevicesAndUsers" },
                   ]}
                   formControl={formControl}
-                  validators={{ required: "Assignment must be selected" }}
                   row
                 />
               </Grid>
@@ -299,7 +297,7 @@ const DeployDefenderForm = () => {
         <Divider sx={{ my: 2 }} />
 
         {/* ASR Section */}
-        <Grid item size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <CippFormComponent
             type="switch"
             label="Show ASR Options"
@@ -314,33 +312,14 @@ const DeployDefenderForm = () => {
           compareType="is"
           compareValue={true}
         >
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Typography variant="h6">ASR Rules</Typography>
             <Typography variant="subtitle1">Set Attack Surface Reduction Rules</Typography>
-            <CippFormComponent
-              type="radio"
-              label=""
-              name="ASR.Mode"
-              options={[
-                { label: "Block mode", value: "block" },
-                { label: "Audit mode", value: "audit" },
-                { label: "Warn mode", value: "warn" },
-              ]}
-              formControl={formControl}
-              validators={{ required: "Mode must be selected" }}
-              row
-            />
           </Grid>
 
-          <Grid item size={{ xs: 12 }}>
+          <Grid item xs={12}>
             <Grid container spacing={2}>
-              <Grid item size={{ md: 6, xs: 12 }}>
-                <CippFormComponent
-                  type="switch"
-                  label="Block execution of potentially obfuscated scripts"
-                  name="ASR.BlockObfuscatedScripts"
-                  formControl={formControl}
-                />
+              <Grid item xs={12} md={6}>
                 <CippFormComponent
                   type="switch"
                   label="Block Adobe Reader from creating child processes"
@@ -373,12 +352,6 @@ const DeployDefenderForm = () => {
                 />
                 <CippFormComponent
                   type="switch"
-                  label="Block use of copied or impersonated system tools"
-                  name="ASR.BlockSystemTools"
-                  formControl={formControl}
-                />
-                <CippFormComponent
-                  type="switch"
                   label="Block Office applications from creating executable content"
                   name="ASR.BlockOfficeExes"
                   formControl={formControl}
@@ -389,14 +362,8 @@ const DeployDefenderForm = () => {
                   name="ASR.BlockOfficeApps"
                   formControl={formControl}
                 />
-                <CippFormComponent
-                  type="switch"
-                  label="Block rebooting machine in Safe Mode"
-                  name="ASR.BlockSafeMode"
-                  formControl={formControl}
-                />
               </Grid>
-              <Grid item size={{ md: 6, xs: 12 }}>
+              <Grid item xs={12} md={6}>
                 <CippFormComponent
                   type="switch"
                   label="Block executable files from running unless they meet a prevalence, age, or trusted list criterion"
@@ -407,12 +374,6 @@ const DeployDefenderForm = () => {
                   type="switch"
                   label="Block JavaScript or VBScript from launching downloaded executable content"
                   name="ASR.blockJSVB"
-                  formControl={formControl}
-                />
-                <CippFormComponent
-                  type="switch"
-                  label="Block Webshell creation for Servers"
-                  name="ASR.BlockWebshellForServers"
                   formControl={formControl}
                 />
                 <CippFormComponent
@@ -454,7 +415,7 @@ const DeployDefenderForm = () => {
               </Grid>
 
               {/* Assign to Group */}
-              <Grid item size={{ xs: 12 }}>
+              <Grid item xs={12}>
                 <Typography variant="subtitle1">Assign to Group</Typography>
                 <CippFormComponent
                   type="radio"
@@ -467,7 +428,6 @@ const DeployDefenderForm = () => {
                     { label: "Assign to all users and devices", value: "AllDevicesAndUsers" },
                   ]}
                   formControl={formControl}
-                  validators={{ required: "Assignment must be selected" }}
                   row
                 />
               </Grid>

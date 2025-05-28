@@ -50,7 +50,7 @@ const CippCustomVariables = ({ id }) => {
           label: "Variable Name",
           placeholder: "Enter the key for the custom variable.",
           required: true,
-          validators: { validate: validateVariableName },
+          validators: validateVariableName,
         },
         {
           type: "textField",
@@ -134,7 +134,7 @@ const CippCustomVariables = ({ id }) => {
             label: "Variable Name",
             placeholder: "Enter the name for the custom variable without %.",
             required: true,
-            validators: { validate: validateVariableName },
+            validators: validateVariableName,
           },
           {
             type: "textField",

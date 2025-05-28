@@ -35,7 +35,6 @@ export const CippFormDomainSelector = ({
           $top: 99,
         },
       }}
-      {...other}
     />
   );
 };
