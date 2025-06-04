@@ -41,7 +41,11 @@ const ApiOfflinePage = () => {
 
     try {
       // Try to ping the API
-      await axios.get("/api/me", { timeout: 45000 });
+      const testCall = await axios.get("/api/me", { timeout: 45000 });
+      console.log("API Test Call Response:", testCall);
+      if (!testCall.headers["content-type"]?.includes("application/json")) {
+        throw new Error("API did not return the expected response.");
+      }
       setTestResult({ success: true, message: "Connection successful! Try refreshing the page." });
     } catch (error) {
       let errorMessage = "Connection failed.";
@@ -50,7 +54,8 @@ const ApiOfflinePage = () => {
         // Request was made and server responded with a status code outside of 2xx range
         errorMessage = `API responded with status: ${error.response.status}`;
         if (error.response.status === 404) {
-          errorMessage += " (API endpoint not found)";
+          errorMessage +=
+            " (API endpoint not found, this can be the case if your Function App is on Version 7 or below)";
         }
       } else if (error.request) {
         // Request was made but no response received
