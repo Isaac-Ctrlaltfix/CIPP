@@ -890,7 +890,7 @@ const Page = () => {
                     label: "Remove Permission",
                     type: "POST",
                     icon: <Delete />,
-                    url: "/api/ExecModifyCalPerms",
+                    url: "/api/ExecModifyContactPerms",
                     data: {
                       userID: graphUserRequest.data?.[0]?.userPrincipalName,
                       tenantFilter: userSettingsDefaults.currentTenant,
@@ -1245,7 +1245,7 @@ const Page = () => {
                       isCollapsible={true}
                     />
                     <CippBannerListCard
-                      isFetching={calPermissions.isLoading}
+                      isFetching={contactPermissions.isLoading}
                       items={contactCard}
                       isCollapsible={true}
                     />

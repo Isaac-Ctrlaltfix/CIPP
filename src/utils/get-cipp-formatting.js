@@ -11,6 +11,7 @@ import {
   BarChart,
 } from "@mui/icons-material";
 import { Chip, Link, SvgIcon } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { CippCopyToClipBoard } from "../components/CippComponents/CippCopyToClipboard";
 import { getCippLicenseTranslation } from "./get-cipp-license-translation";
@@ -193,8 +194,11 @@ export const getCippFormatting = (data, cellName, type, canReceive, flatten = tr
 
   // Handle hardware hash fields
   const hardwareHashFields = ["hardwareHash", "Hardware Hash"];
-  if (hardwareHashFields.includes(cellName) || cellNameLower.includes("hardware")) {
-    if (typeof data === "string" && data.length > 15) {
+  if (
+    typeof data === "string" &&
+    (hardwareHashFields.includes(cellName) || cellNameLower.includes("hardware"))
+  ) {
+    if (data.length > 15) {
       return isText ? data : `${data.substring(0, 15)}...`;
     }
     return isText ? data : data;
@@ -266,10 +270,6 @@ export const getCippFormatting = (data, cellName, type, canReceive, flatten = tr
   }
 
   if (cellName === "ScorePercentage") {
-    return isText ? `${data}%` : <LinearProgressWithLabel variant="determinate" value={data} />;
-  }
-
-  if (cellName === "DMARCPercentagePass") {
     return isText ? `${data}%` : <LinearProgressWithLabel variant="determinate" value={data} />;
   }
 
@@ -468,13 +468,56 @@ export const getCippFormatting = (data, cellName, type, canReceive, flatten = tr
   }
 
   if (cellName === "state") {
-    data =
-      data === "enabled"
+    if (typeof data !== "string") {
+      return isText ? data : <Chip variant="filled" label={data} size="small" color="info" />;
+    }
+
+    const normalized = data.trim().toLowerCase();
+    const label =
+      normalized === "enabled"
         ? "Enabled"
-        : data === "enabledForReportingButNotEnforced"
+        : normalized === "disabled"
+        ? "Disabled"
+        : normalized === "enabledforreportingbutnotenforced" ||
+          normalized === "report-only" ||
+          normalized === "reportonly"
         ? "Report Only"
-        : data;
-    return isText ? data : <Chip variant="outlined" label={data} size="small" color="info" />;
+        : data.charAt(0).toUpperCase() + data.slice(1);
+
+    if (isText) {
+      return label;
+    }
+
+    const chipProps = {
+      size: "small",
+      label,
+      variant: "filled",
+      color: "info",
+    };
+
+    if (normalized === "enabled") {
+      chipProps.color = "info";
+    } else if (normalized === "disabled") {
+      chipProps.color = "default";
+      chipProps.sx = (theme) => ({
+        bgcolor:
+          theme.palette.mode === "dark"
+            ? alpha(theme.palette.common.white, 0.12)
+            : alpha(theme.palette.text.primary, 0.08),
+        color: theme.palette.text.primary,
+        borderColor: "transparent",
+      });
+    } else if (
+      normalized === "enabledforreportingbutnotenforced" ||
+      normalized === "report-only" ||
+      normalized === "reportonly"
+    ) {
+      chipProps.color = "warning";
+    } else {
+      chipProps.variant = "outlined";
+    }
+
+    return <Chip {...chipProps} />;
   }
 
   if (cellName === "Parameters.ScheduledBackupValues") {
